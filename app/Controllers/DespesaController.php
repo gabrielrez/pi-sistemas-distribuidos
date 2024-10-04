@@ -17,11 +17,7 @@ class DespesaController extends Controller
     public function index()
     {
         $despesas = $this->despesa_model->todos();
-
-        if(!$despesas){
-          $despesas =['Não há despesas aqui'];  
-        }
-
+        
         return view('despesas/despesas', [
             'despesas' => $despesas
         ]);

@@ -18,10 +18,6 @@ class ReceitaController extends Controller
     {
         $receitas = $this->receita_model->todos();
 
-        if(!$receitas){
-          $receitas =['Não há receitas aqui'];  
-        }
-
         return view('receitas/receitas', [
             'receitas' => $receitas
         ]);
