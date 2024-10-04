@@ -12,15 +12,22 @@ use App\Controllers\MetaController;
 use App\Controllers\HistoricoController;
 
 $rotas->get('/', function () {
-    return view('home');
+    $total = '48200';
+    $receitas = ['receita 1', 'receita 2'];
+    $despesas = ['despesa 1'];
+    return view('dashboard', [
+        'total' => $total,
+        'receitas' => $receitas,
+        'despesas' => $despesas
+    ]);
 });
 
-$rotas->get('/conta/novo', function () {
-    return view('cadastro');
+$rotas->get('/cadastro', function () {
+    return view('auth/cadastro');
 });
 
-$rotas->get('/conta/login', function () {
-    return view('login');
+$rotas->get('/login', function () {
+    return view('auth/login');
 });
 
 $rotas->post('/usuarios', [UsuarioController::class, 'store']); // Criar usuário (conta)
