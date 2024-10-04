@@ -4,10 +4,10 @@ use Hefestos\Database\Tabela;
 
 return (new Tabela('despesa'))
     ->id()
-    ->int('id_conta')
+    ->int('id_usuario')
     ->int('id_categoria')
     ->int('valor')
     ->string('descricao')
     ->date('data')
-    ->foreignKey('id_conta', 'conta', 'id')
+    ->foreignKey('id_usuario', 'usuario', 'id')
     ->foreignKey('id_categoria', 'categoria', 'id');
