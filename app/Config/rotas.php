@@ -12,10 +12,15 @@ use App\Controllers\MetaController;
 use App\Controllers\HistoricoController;
 
 $rotas->get('/', function () {
+    $usuario = [
+        'nome' => 'Dominic Deccoco',
+        'email' => 'dominic@gmail.com',
+    ];
     $total = '48200';
     $receitas = ['receita 1', 'receita 2'];
     $despesas = ['despesa 1'];
     return view('dashboard', [
+        'usuario' => $usuario,
         'total' => $total,
         'receitas' => $receitas,
         'despesas' => $despesas

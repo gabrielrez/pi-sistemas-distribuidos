@@ -1,4 +1,5 @@
 <h1>Dashboard</h1>
+<p>Olá, <?= $usuario['nome'] ?> 👋</p>
 
 <br>
 
