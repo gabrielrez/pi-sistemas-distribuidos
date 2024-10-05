@@ -32,9 +32,10 @@ class UsuarioController extends Controller
             if (session_status() === PHP_SESSION_NONE) {
                 session_start();
             }
-            $_SESSION['id'] = $this->usuario_model->idInserido();
-            $_SESSION['nome'] = $usuario_existe['nome'];
-            $_SESSION['email'] = $usuario['email'];
+
+            sessao()->guardar('id', $this->usuario_model->idInserido());
+            sessao()->guardar('nome', $usuario['nome']);
+            sessao()->guardar('email', $usuario['email']);
 
             return redirecionar('/');
         }
@@ -59,9 +60,10 @@ class UsuarioController extends Controller
             if (session_status() === PHP_SESSION_NONE) {
                 session_start();
             }
-            $_SESSION['id'] = $usuario_existe['id'];
-            $_SESSION['nome'] = $usuario_existe['nome'];
-            $_SESSION['email'] = $usuario_existe['email'];
+
+            sessao()->guardar('id', $usuario_existe['id']);
+            sessao()->guardar('nome', $usuario_existe['nome']);
+            sessao()->guardar('email', $usuario_existe['email']);
 
             return redirecionar('/');
         }
