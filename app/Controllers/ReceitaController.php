@@ -16,18 +16,22 @@ class ReceitaController extends Controller
 
     public function index()
     {
-        $receitas = $this->receita_model->todos();
+        $receitas = $this->receita_model->where(['id_usuario' => $_SESSION['id']])->todos();
 
         return view('receitas/receitas', [
             'receitas' => $receitas
         ]);
     }
 
-    public function create(){
+    public function create()
+    {
         return view('receitas/novo');
     }
 
-    public function store(){
+    public function store()
+    {
+        $receita = $this->dadosPost();
+        $this->receita_model->insert($receita);
         return redirecionar('/');
     }
 }

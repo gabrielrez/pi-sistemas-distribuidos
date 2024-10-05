@@ -21,7 +21,7 @@
 
 <div class="total">
     <h3>Total</h3>
-    <?= number_format($total / 100, 2, ',', '.') . ' R$'; ?>
+    <?= number_format(28000 / 100, 2, ',', '.') . ' R$'; ?>
 </div>
 
 <br>
@@ -31,29 +31,11 @@
 <div class="container" style="display: flex; gap: 120px;">
     <div class="receitas">
         <h3>Suas Receitas</h3>
-        <?php 
-        
-        foreach($receitas as $receita){
-            echo $receita . '<br>';
-        }
-
-        ?>
-
-        <br>
         <a href="/receitas">Ver todas</a>
     </div>
 
     <div class="despesas">
         <h3>Suas Despesas</h3>
-        <?php 
-        
-        foreach($despesas as $despesa){
-            echo $despesa . '<br>';
-        }
-
-        ?>
-
-        <br>
         <a href="/despesas">Ver todas</a>
     </div>
 

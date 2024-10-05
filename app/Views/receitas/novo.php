@@ -1,5 +1,9 @@
 <h1>Nova Receita</h1>
 
+<a href="/">Voltar</a>
+<br>
+<br>
+
 <form action="/receitas" method="POST">
     <div class="input">
         <label for="categoria">Categoria</label>
@@ -22,11 +26,12 @@
     </div>
     <div class="input">
         <label for="valor">Valor</label>
-        <input type="number" placeholder="00.00 R$">
+        <input type="number" name="valor" placeholder="00.00 R$">
     </div>
     <div class="input">
         <label for="descricao">Descrição</label>
         <textarea name="descricao" id="descricao_text_area"></textarea>
     </div>
+    <input type="hidden" name="id_usuario" value="<?= $_SESSION['id'] ?>">
     <button>Adicionar</button>
 </form>
