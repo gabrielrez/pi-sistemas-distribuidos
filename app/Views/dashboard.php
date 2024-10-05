@@ -1,6 +1,9 @@
 <h1>Dashboard</h1>
 <p>Olá, <?= $usuario['nome'] ?> 👋</p>
+<a href="/logout">Sair da conta</a>
 
+<br>
+<br>
 <br>
 
 <a href="/receitas/novo">Adicionar Receita</a>
