@@ -29,15 +29,7 @@ class UsuarioController extends Controller
             $usuario['senha'] = password_hash($usuario['senha'], PASSWORD_DEFAULT);
             $this->usuario_model->insert($usuario);
 
-            if (session_status() === PHP_SESSION_NONE) {
-                session_start();
-            }
-
-            sessao()->guardar('id', $this->usuario_model->idInserido());
-            sessao()->guardar('nome', $usuario['nome']);
-            sessao()->guardar('email', $usuario['email']);
-
-            return redirecionar('/');
+            return redirecionar('/login');
         }
 
         return redirecionar('/cadastro')
@@ -56,11 +48,6 @@ class UsuarioController extends Controller
         $usuario_existe = $this->usuario_model->primeiroOnde(['email' => $usuario['email']]);
 
         if ($usuario_existe && password_verify($usuario['senha'], $usuario_existe['senha'])) {
-
-            if (session_status() === PHP_SESSION_NONE) {
-                session_start();
-            }
-
             sessao()->guardar('id', $usuario_existe['id']);
             sessao()->guardar('nome', $usuario_existe['nome']);
             sessao()->guardar('email', $usuario_existe['email']);

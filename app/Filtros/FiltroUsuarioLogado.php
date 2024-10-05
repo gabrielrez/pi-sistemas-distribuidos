@@ -12,9 +12,8 @@ class FiltroUsuarioLogado
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-        return isset($_SESSION['id']);
 
-        if (!$usuarioLogado()) {
+        if (!isset($_SESSION['id'])) {
             return redirecionar('/login')->com('feedback', 'Você precisa estar logado para acessar essa página.');
         }
     }
