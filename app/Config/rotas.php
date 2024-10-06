@@ -12,7 +12,9 @@ use App\Controllers\DespesaController;
 use App\Controllers\MetaController;
 use App\Controllers\HistoricoController;
 
-$rotas->get('/', [DashboardController::class, 'index'])->filtro('logado');
+$rotas->get('/', function () {
+    return view('landing_page');
+});
 
 $rotas->get('/cadastro', function () {
     return view('auth/cadastro');
@@ -21,6 +23,8 @@ $rotas->get('/cadastro', function () {
 $rotas->get('/login', function () {
     return view('auth/login');
 });
+
+$rotas->get('/dashboard', [DashboardController::class, 'index'])->filtro('logado'); // Dashboard
 
 $rotas->post('/cadastro', [UsuarioController::class, 'cadastro']); // Criar usuário
 $rotas->post('/login', [UsuarioController::class, 'login']); // Login usuário

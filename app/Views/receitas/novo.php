@@ -1,6 +1,6 @@
 <h1>Nova Receita</h1>
 
-<a href="/">Voltar</a>
+<a href="/dashboard">Voltar</a>
 <br>
 <br>
 

@@ -32,6 +32,6 @@ class ReceitaController extends Controller
     {
         $receita = $this->dadosPost();
         $this->receita_model->insert($receita);
-        return redirecionar('/');
+        return redirecionar('/dashboard');
     }
 }

@@ -43,12 +43,12 @@ class UsuarioController extends Controller
 
         sessao()->guardar('usuario', $usuario_autenticado);
 
-        return redirecionar('/');
+        return redirecionar('/dashboard');
     }
 
     public function logout()
     {
         sessao()->destruir();
-        return redirecionar('/login');
+        return redirecionar('/');
     }
 }

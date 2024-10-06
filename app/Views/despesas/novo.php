@@ -1,5 +1,9 @@
 <h1>Nova Despesa</h1>
 
+<a href="/dashboard">Voltar</a>
+<br>
+<br>
+
 <form action="/despesas" method="POST">
     <div class="input">
         <label for="categoria">Categoria</label>

@@ -32,6 +32,6 @@ class DespesaController extends Controller
     {
         $despesa = $this->dadosPost();
         $this->despesa_model->insert($despesa);
-        return redirecionar('/');
+        return redirecionar('/dashboard');
     }
 }

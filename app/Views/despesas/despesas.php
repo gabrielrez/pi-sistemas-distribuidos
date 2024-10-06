@@ -1,6 +1,6 @@
 <h1>Despesas</h1>
 
-<a href="/">Voltar</a>
+<a href="/dashboard">Voltar</a>
 <br>
 <br>
 <a href="/despesas/novo">Adicionar Despesa</a>
