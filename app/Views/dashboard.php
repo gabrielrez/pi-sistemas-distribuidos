@@ -1,5 +1,5 @@
 <h1>Dashboard</h1>
-<p>Olá, <?= $usuario['nome'] ?> 👋</p>
+<p>Olá, <?= sessao()->pegar('usuario.nome') ?> 👋</p>
 <a href="/logout">Sair da conta</a>
 
 <br>
@@ -21,7 +21,7 @@
 
 <div class="total">
     <h3>Total</h3>
-    <?= number_format(28000 / 100, 2, ',', '.') . ' R$'; ?>
+    <?= ($total_receitas - $total_despesas) . ' R$'; ?>
 </div>
 
 <br>

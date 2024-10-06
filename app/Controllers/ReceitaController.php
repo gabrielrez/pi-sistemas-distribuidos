@@ -16,7 +16,7 @@ class ReceitaController extends Controller
 
     public function index()
     {
-        $receitas = $this->receita_model->where(['id_usuario' => $_SESSION['id']])->todos();
+        $receitas = $this->receita_model->where(['id_usuario' => sessao()->pegar('usuario.id')])->todos();
 
         return view('receitas/receitas', [
             'receitas' => $receitas

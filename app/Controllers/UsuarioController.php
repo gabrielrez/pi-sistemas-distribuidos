@@ -18,13 +18,7 @@ class UsuarioController extends Controller
     {
         $usuario = $this->dadosPost();
 
-        if (empty($usuario['nome']) || empty($usuario['email']) || empty($usuario['senha'])) {
-            return redirecionar('/cadastro')
-                ->com('feedback', 'Preencha todos os campos.');
-        }
-
         $usuario_existe = $this->usuario_model->primeiroOnde(['email' => $usuario['email']], 'email');
-
         if (!$usuario_existe) {
             $usuario['senha'] = password_hash($usuario['senha'], PASSWORD_DEFAULT);
             $this->usuario_model->insert($usuario);
@@ -38,30 +32,23 @@ class UsuarioController extends Controller
 
     public function login()
     {
-        $usuario = $this->dadosPost();
+        $email ??= $this->dadosPost('email');
+        $senha ??= $this->dadosPost('senha');
 
-        if (empty($usuario['email']) || empty($usuario['senha'])) {
+        $usuario_autenticado = $this->usuario_model->autenticar($email, $senha);
+        if (!$usuario_autenticado) {
             return redirecionar('/login')
-                ->com('feedback', 'Preencha todos os campos.');
+                ->com('feedback', 'Email ou senha incorretos.');
         }
 
-        $usuario_existe = $this->usuario_model->primeiroOnde(['email' => $usuario['email']]);
+        sessao()->guardar('usuario', $usuario_autenticado);
 
-        if ($usuario_existe && password_verify($usuario['senha'], $usuario_existe['senha'])) {
-            sessao()->guardar('id', $usuario_existe['id']);
-            sessao()->guardar('nome', $usuario_existe['nome']);
-            sessao()->guardar('email', $usuario_existe['email']);
-
-            return redirecionar('/');
-        }
-
-        return redirecionar('/login')
-            ->com('feedback', 'Email ou/e senha incorretos');
+        return redirecionar('/');
     }
 
     public function logout()
     {
-        session_destroy();
+        sessao()->destruir();
         return redirecionar('/login');
     }
 }

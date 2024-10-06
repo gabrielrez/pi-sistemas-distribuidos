@@ -32,6 +32,6 @@
         <label for="descricao">Descrição</label>
         <textarea name="descricao" id="descricao_text_area"></textarea>
     </div>
-    <input type="hidden" name="id_usuario" value="<?= $_SESSION['id'] ?>">
+    <input type="hidden" name="id_usuario" value="<?= sessao()->pegar('usuario.id') ?>">
     <button>Adicionar</button>
 </form>

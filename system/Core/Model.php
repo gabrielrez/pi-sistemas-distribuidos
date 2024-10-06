@@ -90,11 +90,11 @@ abstract class Model
             $params = $entidade->paraArray();
             extrair_item($entidade->chavePrimaria(), $params);
         }
-        
+
         return $this->db()->insert($params, $retornar_id);
     }
 
-    
+
     /**
      * Atalho para interagir com o metodo set() do query builder (objetos tentarão ser convertidos para array)
      */
@@ -144,7 +144,7 @@ abstract class Model
      * @author Brunoggdev
      */
     public function delete(int|string|array|object $condicao)
-    {   
+    {
         $where = match (true) {
             $condicao instanceof Entidade => [$condicao->chavePrimaria() => $condicao->paraArray()[$condicao->chavePrimaria()] ?? null],
             is_numeric($condicao) => ['id' => $condicao],
