@@ -19,15 +19,15 @@ class UsuarioController extends Controller
         $usuario = $this->dadosPost();
 
         $usuario_existe = $this->usuario_model->primeiroOnde(['email' => $usuario['email']], 'email');
-        if (!$usuario_existe) {
-            $usuario['senha'] = password_hash($usuario['senha'], PASSWORD_DEFAULT);
-            $this->usuario_model->insert($usuario);
-
-            return redirecionar('/login');
+        if ($usuario_existe) {
+            return redirecionar('/cadastro')
+                ->com('feedback', 'Já existe um usuário com esse email');
         }
 
-        return redirecionar('/cadastro')
-            ->com('feedback', 'Já existe um usuário com esse email');
+        $usuario['senha'] = encriptar($usuario['senha']);
+        $this->usuario_model->insert($usuario);
+
+        return redirecionar('/login');
     }
 
     public function login()
