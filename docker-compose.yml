@@ -1,6 +1,8 @@
-# Apenas use "docker compose up" na linha de comando e pronto! servidor rodando em http://localhost:8080
+# Apenas use "docker compose up" na linha de comando e pronto! servidor rodando em http://localhost:8080.
+# Todas vez que for fazer um push apague os arquvos da pasta "bd" no diretorio: app/Database/bd.
+
 services:
-  web:
+  back-end:
     image: php:8.3-apache
     ports:
       - "8080:8080"
@@ -8,7 +10,7 @@ services:
       - .:/var/www/html
     entrypoint: ["php", "forja", "iniciar", "0.0.0.0:8080"] # iniciando o servidor em 0.0.0.0:8080 para que possa ser acessado fora do container
 
-  db:
+  data-base:
     image: mysql:latest
     restart: always
     environment:
@@ -19,7 +21,7 @@ services:
     ports:
       - "3307:3306"
     volumes:
-      - ./app/Database/Banco de Dados:/var/lib/mysql # Persistência de dados do banco de dados.
+      - ./app/Database/bd:/var/lib/mysql # Persistência de dados do banco de dados.
       - ./app/Database/sql:/docker-entrypoint-initdb.d # Script para criar tabelas.
   
   phpmyadmin:
