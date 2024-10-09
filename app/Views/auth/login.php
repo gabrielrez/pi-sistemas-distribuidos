@@ -53,7 +53,7 @@
         border-radius: 8px;
         border: none;
         background-color: #49b759;
-        font-family: 'Inter';
+        font-family: 'Poppins';
         font-size: 1rem;
         font-weight: 600;
         transition: 0.3s ease;

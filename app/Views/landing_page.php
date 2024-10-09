@@ -24,10 +24,6 @@
         align-items: center;
     }
 
-    .detalhe {
-        color: #49b759;
-    }
-
     main h1 {
         font-weight: 700;
         font-size: 4.5rem;
