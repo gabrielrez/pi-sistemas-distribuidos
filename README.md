@@ -1,20 +1,12 @@
-# HefestosPHP
-Um framework PHP em português com 0 dependências onde o intuito principal é diminuir a curva de aprendizado dos grandes frameworks do mercado. Para tal, este pretende ser simples e prático para familiarizar iniciantes aos conceitos básicos da arquitetura MVC na linguagem, sem maiores complicações como o idioma e sobrecarga de informações dos frameworks mais complexos. Desse modo, quando passarem a utilizar algo como Laravel, CodeIgniter ou Symphony, eles já estarão habituados no essencial de seu funcionamento.
+# Conta Certa
 
-# Instalação e utilização
-A fim de reduzir qualquer atrito, tudo que é necessário para utilização do framework está disponível diretamente nele.
-Dessa forma, é necessário apenas baixar o arquivo zip ou criar um repositório baseado neste template.
+Este projeto foi desenvolvido no intuito de criar uma ferramenta que facilite a gestão financeira de uma pessoa, logo pensamos em fazer uma aplicação web de fácil acesso com compatibilidade tanto para o mobile quanto para o computador. Pensando nisso, nós teremos quatro categorias de finanças para gerir, sendo elas: receitas, despesas, investimentos e metas onde o usuário poderá adicionar, alterar e deletar qualquer um dos registros dessas quatro categorias.
 
-Isso significa que o framework não necessita do composer, mas este pode sim ser utilizado para importar quaisquer outras bibliotecas que o usuário desejar.
+**Tecnologias:**
 
-- ##### Documentação Online: <a href="https://brunoggdev.github.io/hefestosphp-docs/" target="_blank">brunoggdev.github.io/hefestosphp-docs/</a>
+* HTML, CSS E JS no front-end;
+* PHP e o HefestosPHP no back-end;
+* Mysql no database;
+* Docker e Composer.
 
-- ##### Caso não queira apenas uma API ou não tenha ainda uma opinião sobre o seu front-end, cheque a branch <a href="https://github.com/brunoggdev/hefestosphp/tree/baterias-inclusas"> Baterias Inclusas</a> para algumas facilidades extras nesse lado.
-
-- ##### Duvidas, sugestões ou curiosidades? Sinta-se livre para entrar em contato através do e-mail brunoggdev@gmail.com.
-
-# Forje algo incrível!
-Sendo suas maiores inspirações o Laravel, framework para artesãos da web, e o CodeIgniter, HefestosPHP leva o nome do deus grego das forjas, dos artesãos e do fogo, não só fazendo alusão a estas inspirações mas também incentivando o iniciante a criar e experimentar.
-
-
-##### *Obrigado aos madrigais por todo o enorme apoio e aos que carinhosamente conhecem o framework como "Fruno"
+[Documentação](https://drive.google.com/drive/folders/1G5NEmaitHriDHS7dnUyU5E42HE2g-zXp?usp=sharing)
