@@ -18,6 +18,9 @@ services:
       MYSQL_ROOT_PASSWORD: root
     ports:
       - '3307:3306'
+    volumes:
+      - ./app/Database:/var/lib/mysql # Persistência de dados do banco de dados
+      - ./sql-scripts:/docker-entrypoint-initdb.d # Script para criar tabelas
   
   phpmyadmin:
     image: phpmyadmin:latest
