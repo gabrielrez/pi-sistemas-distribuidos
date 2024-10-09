@@ -19,13 +19,17 @@ class DashboardController extends Controller
 
     public function index()
     {
-        [$receitas, $total_receitas] = $this->receitas_model->resumoReceitas();
-        [$despesas, $total_despesas] = $this->despesas_model->resumoDespesas();
+        $id_usuario = sessao()->pegar('usuario.id');
+
+        [$receitas, $ultimas_receitas, $total_receitas] = $this->receitas_model->resumoReceitas($id_usuario);
+        [$despesas, $ultimas_despesas, $total_despesas] = $this->despesas_model->resumoDespesas($id_usuario);
 
         return view('dashboard', [
             'receitas' => $receitas,
+            'ultimas_receitas' => $ultimas_receitas,
             'total_receitas' => $total_receitas,
             'despesas' => $despesas,
+            'ultimas_despesas' => $ultimas_despesas,
             'total_despesas' => $total_despesas
         ]);
     }

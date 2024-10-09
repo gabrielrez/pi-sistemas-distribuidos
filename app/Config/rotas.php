@@ -17,10 +17,16 @@ $rotas->get('/', function () {
 });
 
 $rotas->get('/cadastro', function () {
+    if ($_SESSION) {
+        sessao()->destruir();
+    }
     return view('auth/cadastro');
 });
 
 $rotas->get('/login', function () {
+    if ($_SESSION) {
+        sessao()->destruir();
+    }
     return view('auth/login');
 });
 

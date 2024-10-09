@@ -12,8 +12,9 @@ class Despesa extends Model
     public function resumoDespesas()
     {
         $despesas = $this->where(['id_usuario' => sessao()->pegar('usuario.id')])->todos();
+        $ultimas_despesas = array_slice($despesas, -3);
         $total = array_sum(array_column($despesas, 'valor'));
 
-        return [$despesas, $total];
+        return [$despesas, $ultimas_despesas, $total];
     }
 }
