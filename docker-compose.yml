@@ -7,3 +7,22 @@ services:
     volumes:
       - .:/var/www/html
     entrypoint: ["php", "forja", "iniciar", "0.0.0.0:8080"] # iniciando o servidor em 0.0.0.0:8080 para que possa ser acessado fora do container
+
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: pi_db
+      MYSQL_USER: pi
+      MYSQL_PASSWORD: pi
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - '3307:3306'
+  
+  phpmyadmin:
+    image: phpmyadmin:latest
+    restart: always
+    ports:
+      - 8081:80
+    environment:
+      - PMA_ARBITRARY=1
