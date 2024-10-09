@@ -20,7 +20,7 @@ services:
       - "3307:3306"
     volumes:
       - ./app/Database/Banco de Dados # Persistência de dados do banco de dados.
-      - ./app:/Database/sql:/docker-entrypoint-initdb.d # Script para criar tabelas.
+      - ./app/Database/sql:/docker-entrypoint-initdb.d # Script para criar tabelas.
   
   phpmyadmin:
     image: phpmyadmin:latest
