@@ -10,6 +10,7 @@
                 <a class="criar-conta" href="/cadastro">Criar Conta</a>
             </div>
         </div>
+        <img class="lp-img" src="<?= url_base('images/lp-img.svg') ?>" alt="Aplicativo de finanças pessoais">
     </main>
 </body>
 
@@ -22,6 +23,10 @@
         overflow: hidden;
         display: flex;
         align-items: center;
+    }
+
+    .lp-img{
+        max-width: 100%;
     }
 
     main h1 {
@@ -39,8 +44,13 @@
     }
 
     .container-lp {
-        max-width: 90%;
-        margin-left: 200px;
+        max-width: 75%;
+        margin-left: auto;
+        margin-right: auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        gap: 40px;
     }
 
     .btns {
