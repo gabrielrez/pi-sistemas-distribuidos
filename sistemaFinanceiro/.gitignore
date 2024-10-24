@@ -20,4 +20,4 @@ yarn-error.log
 /.idea
 /.vscode
 /.zed
-.docker
+/.docker/db_data
