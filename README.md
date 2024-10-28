@@ -8,7 +8,7 @@ Este projeto foi desenvolvido utilizando o **Laravel**.
 **AVISO IMPORTANTE:** É necessário ter o Docker Engine instalado no seu computador local.
 
 1. Acesse o diretório do projeto:  
-   `cd sistemaFinanceiro`
+   `cd pi-sistemas-distribuidos`
 
 2. Execute o comando para construir e iniciar o container:  
    `docker compose up -d`
