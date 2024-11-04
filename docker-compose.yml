@@ -1,5 +1,5 @@
 services:
-  php:
+  php1:
     build:
       context: .
       dockerfile: .docker/php-fpm/Dockerfile
@@ -7,8 +7,15 @@ services:
       - ./:/app
     networks:
       - laravel
-    depends_on:
-      - db-api-sistemafinanceiro
+
+  php2:
+    build:
+      context: .
+      dockerfile: .docker/php-fpm/Dockerfile
+    volumes:
+      - ./:/app
+    networks:
+      - laravel
 
   nginx:
     build:
@@ -19,7 +26,8 @@ services:
     ports:
       - "8000:80"
     depends_on:
-      - php
+      - php1
+      - php2
     networks:
       - laravel
 
