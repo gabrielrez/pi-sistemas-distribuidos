@@ -5,6 +5,8 @@ services:
       dockerfile: .docker/php-fpm/Dockerfile
     volumes:
       - ./:/app
+    ports:
+      - "9000:9000"
     networks:
       - laravel
 
@@ -14,6 +16,8 @@ services:
       dockerfile: .docker/php-fpm/Dockerfile
     volumes:
       - ./:/app
+    ports:
+      - "9001:9001"
     networks:
       - laravel
 
@@ -36,15 +40,13 @@ services:
     image: mysql
     volumes:
       - .docker/db_data:/var/lib/mysql
-    
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_USER: ${DB_USERNAME}
       MYSQL_PASSWORD: ${DB_PASSWORD}
-    
     ports:
-      - "3307:3306"  
+      - "3307:3306"
     networks:
       - laravel
 
