@@ -9,5 +9,15 @@ class Meta extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['descricao', 'valor_alvo', 'data_meta'];
+    protected $table = 'meta_financeiras'; 
+    protected $primaryKey = 'id_meta';     
+    public $incrementing = true;           
+    protected $keyType = 'int';            
+    protected $fillable = ['descricao', 'valor_alvo', 'data_meta', 'id_users'];  
+
+    public function index()
+{
+    return Meta::paginate(60);
+}
+
 }

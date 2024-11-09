@@ -9,7 +9,7 @@ class CreateMetaFinanceirasTable extends Migration
     public function up()
     {
         Schema::create('meta_financeiras', function (Blueprint $table) {
-            $table->id('id_meta');
+            $table->bigIncrements('id_meta');
             $table->foreignId('id_users')->constrained('users');
             $table->string('descricao')->nullable();
             $table->decimal('valor_alvo', 10, 2);
