@@ -10,6 +10,9 @@ use App\Http\Controllers\DespesaController;
 use App\Http\Controllers\ReceitaController;
 use App\Http\Controllers\OrcamentoController;
 use App\Http\Controllers\RelatorioController;
+use App\Http\Controllers\ConfiguracoesUsuarioController;
+use App\Http\Controllers\ExportacaoDadosController;
+
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -84,4 +87,20 @@ Route::prefix('relatorios')->group(function () {
     Route::get('/{id}', [RelatorioController::class, 'show']);
     Route::put('/{id}', [RelatorioController::class, 'update']);
     Route::delete('/{id}', [RelatorioController::class, 'destroy']);
+});
+
+Route::prefix('configuracoes-usuarios')->group(function () {
+    Route::get('/', [ConfiguracoesUsuarioController::class, 'index']);
+    Route::post('/', [ConfiguracoesUsuarioController::class, 'store']);
+    Route::get('/{id}', [ConfiguracoesUsuarioController::class, 'show']);
+    Route::put('/{id}', [ConfiguracoesUsuarioController::class, 'update']);
+    Route::delete('/{id}', [ConfiguracoesUsuarioController::class, 'destroy']);
+});
+
+Route::prefix('exportacao-dados')->group(function () {
+    Route::get('/', [ExportacaoDadosController::class, 'index']);
+    Route::post('/', [ExportacaoDadosController::class, 'store']);
+    Route::get('/{id}', [ExportacaoDadosController::class, 'show']);
+    Route::put('/{id}', [ExportacaoDadosController::class, 'update']);
+    Route::delete('/{id}', [ExportacaoDadosController::class, 'destroy']);
 });
