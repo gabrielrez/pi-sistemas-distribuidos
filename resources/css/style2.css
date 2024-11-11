@@ -1,0 +1,221 @@
+body {
+    margin: 0px;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  
+    background: rgb(87, 0, 228);
+  }
+  
+  header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #858585a8;
+    width: 100%;
+    height: 100px;
+  
+    background-color: rgb(87, 0, 228);
+    color: #fff;
+  }
+  
+  header h1 {
+    margin-left: 20px;
+  }
+  
+  header ul {
+    margin-right: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  header li {
+    list-style-type: none;
+    padding-left: 5px;
+  }
+  
+
+  main {
+    background-image: url(close-up-em-objetos-de-educacao-e-economia-1.jpg);
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+  
+    position: relative;
+    height: 550px;
+    width: 100%;
+    color: #ffffff;
+  }
+  
+  main h1 {
+    color: rgb(255, 255, 131);
+  }
+  
+  .filtro_cor {
+    margin-left: -20px;
+    margin-top: -20px;
+    position: absolute;
+    top: 20px; /* Ajuste a posição vertical do quadrado */
+    left: 20px; /* Ajuste a posição horizontal do quadrado */
+    width: 100%; /* Largura do quadrado */
+    height: 100%; /* Altura do quadrado */
+  
+    background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(7, 50, 143, 0.783) 100%
+    );
+    z-index: 1;
+  }
+  
+  .bt1 {
+    width: 240px;
+    height: 60px;
+  
+    border-radius: 50px;
+    border-color: rgb(87, 0, 228);
+    background: rgb(111, 45, 216);
+    border-style: solid;
+    border-width: 3px;
+    color: white;
+  
+    font-family: American Typewriter, serif;
+  
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  }
+  
+  .bt2 {
+    width: 240px;
+    height: 60px;
+  
+    border-radius: 50px;
+    border-color: rgb(87, 0, 228);
+    background: #00000000;
+    border-style: solid;
+    border-width: 3px;
+    color: white;
+  
+    font-family: American Typewriter, serif;
+  
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  }
+  
+  .textos {
+    position: relative;
+    margin-left: 20px;
+    width: 60vw;
+  
+    z-index: 2;
+  }
+  
+  .textos h1 {
+    font-size: 60px;
+  }
+  
+  .textos p {
+    font-size: 24px;
+  }
+  
+  .botoes {
+    position: relative;
+    z-index: 2;
+    display: flex;
+  }
+  
+  .botoes button {
+    margin-left: 20px;
+    font-size: 24px;
+  }
+  
+  .Graficos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+    height: 600px;
+    background: rgba(255, 0, 0, 0);
+  
+    margin-top: 20px;
+    border-radius: 20px;
+  
+    background: rgb(251, 249, 255);
+    padding-right: 50px;
+    z-index: 3;
+  }
+  
+  .Graficos h1 {
+    margin-top: 150px;
+  }
+  
+  .graficoPatrimonio {
+    margin-left: 120px;
+  }
+  
+  .grafico1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .opcoes {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100vw;
+    height: 150px;
+  
+    margin-top: 50px;
+  }
+  
+  .opcoes div {
+    background: rgb(251, 249, 255);
+    width: 200px;
+    height: 200px;
+    color: #000000;
+    border-radius: 10px;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .opcoes div:hover {
+    scale: 1.01;
+  }
+  
+  .opcoes .receitas {
+    background-image: url(receitas.jpg);
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+  
+    display: flex;
+    align-items: end;
+  }
+  
+  .opcoes .despesas {
+    background-image: url(Despesas.jpg);
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+  
+    display: flex;
+    align-items: end;
+  }
+  
+  .opcoes .metas {
+    background-image: url(porquinho.jpg);
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+  
+    display: flex;
+    align-items: end;
+  }  
