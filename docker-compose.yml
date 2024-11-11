@@ -1,66 +1,64 @@
+version: "3"
+
 services:
-  php1:
-    build:
-      context: .
-      dockerfile: .docker/php-fpm/Dockerfile
-    volumes:
-      - ./:/app
-    ports:
-      - "9000:9000"
-    networks:
-      - laravel
+    back-end: # php:8.3-fpm
+        build:
+            context: .
+            dockerfile: ./.docker/php-fpm/Dockerfile
+        restart: unless-stopped
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+        depends_on:
+            - redis
+        networks:
+            - laravel
 
-  php2:
-    build:
-      context: .
-      dockerfile: .docker/php-fpm/Dockerfile
-    volumes:
-      - ./:/app
-    ports:
-      - "9001:9001"
-    networks:
-      - laravel
+    front-end: #nginx
+        image: nginx:alpine
+        restart: unless-stopped
+        ports:
+            - "8000:80"
+        volumes:
+            - ./:/var/www
+            - ./.docker/nginx/:/etc/nginx/conf.d/
+        networks:
+            - laravel
 
-  nginx:
-    build:
-      context: .
-      dockerfile: .docker/nginx/Dockerfile
-    volumes:
-      - ./:/app
-    ports:
-      - "8000:80"
-    depends_on:
-      - php1
-      - php2
-    networks:
-      - laravel
+    data-base: # mysql
+        image: mysql:8.0
+        platform: linux/x86_64
+        restart: unless-stopped
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE:-laravel}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
+            MYSQL_PASSWORD: ${DB_PASSWORD:-userpass}
+            MYSQL_USER: ${DB_USERNAME:-username}
+        volumes:
+            - ./.docker/mysql/dbdata:/var/lib/mysql
+        ports:
+            - "3300:3306"
+        networks:
+            - laravel
 
-  db-api-sistemafinanceiro:
-    container_name: mysql
-    image: mysql
-    volumes:
-      - .docker/db_data:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${DB_DATABASE}
-      MYSQL_USER: ${DB_USERNAME}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-    ports:
-      - "3307:3306"
-    networks:
-      - laravel
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        platform: linux/x86_64
+        restart: unless-stopped
+        ports:
+            - "8080:80"
+        environment:
+            PMA_HOST: data-base
+            PMA_PORT: 3306
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
+        networks:
+            - laravel
 
-  phpmyadmin-api-sistemafinanceiro:
-    image: phpmyadmin/phpmyadmin
-    environment:
-      PMA_HOST: db-api-sistemafinanceiro
-      PMA_USER: root
-      PMA_PASSWORD: ${DB_ROOT_PASSWORD}
-    ports:
-      - "9999:80"
-    networks:
-      - laravel
+    redis:
+        image: redis:latest
+        networks:
+            - laravel
 
 networks:
-  laravel:
-    driver: bridge
+    laravel:
+        driver: bridge
