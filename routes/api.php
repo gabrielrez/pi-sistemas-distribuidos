@@ -7,6 +7,7 @@ use App\Http\Controllers\ContaController;
 use App\Http\Controllers\MetaController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\DespesaController;
+use App\Http\Controllers\ReceitaController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -55,3 +56,13 @@ Route::prefix('despesas')->group(function () {
     Route::put('/{id}', [DespesaController::class, 'update']);
     Route::delete('/{id}', [DespesaController::class, 'destroy']);
 });
+
+
+Route::prefix('receitas')->group(function () {
+    Route::get('/', [ReceitaController::class, 'index']);
+    Route::post('/', [ReceitaController::class, 'store']);
+    Route::get('/{id}', [ReceitaController::class, 'show']);
+    Route::put('/{id}', [ReceitaController::class, 'update']);
+    Route::delete('/{id}', [ReceitaController::class, 'destroy']);
+});
+
