@@ -8,6 +8,8 @@ use App\Http\Controllers\MetaController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\DespesaController;
 use App\Http\Controllers\ReceitaController;
+use App\Http\Controllers\OrcamentoController;
+use App\Http\Controllers\RelatorioController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -66,3 +68,20 @@ Route::prefix('receitas')->group(function () {
     Route::delete('/{id}', [ReceitaController::class, 'destroy']);
 });
 
+
+Route::prefix('orcamentos')->group(function () {
+    Route::get('/', [OrcamentoController::class, 'index']);
+    Route::post('/', [OrcamentoController::class, 'store']);
+    Route::get('/{id}', [OrcamentoController::class, 'show']);
+    Route::put('/{id}', [OrcamentoController::class, 'update']);
+    Route::delete('/{id}', [OrcamentoController::class, 'destroy']);
+});
+
+
+Route::prefix('relatorios')->group(function () {
+    Route::get('/', [RelatorioController::class, 'index']);
+    Route::post('/', [RelatorioController::class, 'store']);
+    Route::get('/{id}', [RelatorioController::class, 'show']);
+    Route::put('/{id}', [RelatorioController::class, 'update']);
+    Route::delete('/{id}', [RelatorioController::class, 'destroy']);
+});
