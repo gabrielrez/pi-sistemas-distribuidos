@@ -1,36 +1,41 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Http\Controllers;
 
-use App\Models\Receita;
-use App\Models\Despesa;
-use Hefestos\Core\Controller;
+use App\Models\Income;
+use App\Models\Expense;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    protected $receitas_model;
-    protected $despesas_model;
-
-    public function __construct()
+    public function index(Request $request)
     {
-        $this->receitas_model = new Receita();
-        $this->despesas_model = new Despesa();
-    }
+        $user = Auth::user();
 
-    public function index()
-    {
-        $id_usuario = sessao()->pegar('usuario.id');
+        $incomes = Income::where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
 
-        [$receitas, $ultimas_receitas, $total_receitas] = $this->receitas_model->resumoReceitas($id_usuario);
-        [$despesas, $ultimas_despesas, $total_despesas] = $this->despesas_model->resumoDespesas($id_usuario);
+        $total_incomes = Income::where('user_id', $user->id)
+            ->sum('amount');
+
+        $expenses = Expense::where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
+
+        $total_expenses = Expense::where('user_id', $user->id)
+            ->sum('amount');
 
         return view('dashboard', [
-            'receitas' => $receitas,
-            'ultimas_receitas' => $ultimas_receitas,
-            'total_receitas' => $total_receitas,
-            'despesas' => $despesas,
-            'ultimas_despesas' => $ultimas_despesas,
-            'total_despesas' => $total_despesas
+            'incomes' => $incomes,
+            'latest_incomes' => $incomes,
+            'total_incomes' => $total_incomes,
+            'expenses' => $expenses,
+            'latest_expenses' => $expenses,
+            'total_expenses' => $total_expenses
         ]);
     }
 }

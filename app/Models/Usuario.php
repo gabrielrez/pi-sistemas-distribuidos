@@ -2,29 +2,41 @@
 
 namespace App\Models;
 
-use Hefestos\Core\Model;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
 
 class Usuario extends Model
 {
-    // tabela do banco de dados ao qual o model está relacionado
-    protected string $tabela = 'usuario';
+    // A tabela do banco de dados associada ao modelo
+    protected $table = 'usuarios';
 
-    public function autenticar(string $email, string $senha): array|false
+    // Os atributos que podem ser atribuídos em massa
+    protected $fillable = [
+        'nome',
+        'email',
+        'senha',
+    ];
+
+    // Os atributos que devem ser ocultados para serialização
+    protected $hidden = [
+        'senha',
+    ];
+
+    public function autenticar($email, $senha): ?array
     {
-        $usuario = $this->where('email', $email)->primeiro();
+        $usuario = $this->where('email', $email)->first();
 
         if (!$usuario) {
-            return false;
+            return null;
         }
 
-        $checar_senha = password_verify($senha, $usuario['senha']);
-
-        if (!$checar_senha) {
-            return false;
+        if (!Hash::check($senha, $usuario->senha)) {
+            return null;
         }
 
-        unset($usuario['senha']);
+        $usuarioData = $usuario->toArray();
+        unset($usuarioData['senha']);
 
-        return $usuario;
+        return $usuarioData;
     }
 }

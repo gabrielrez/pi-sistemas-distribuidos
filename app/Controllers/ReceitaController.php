@@ -1,37 +1,43 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Http\Controllers;
 
-use Hefestos\Core\Controller;
-use App\Models\Receita;
+use App\Models\Income;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReceitaController extends Controller
 {
-    protected $receita_model;
-
-    public function __construct()
-    {
-        $this->receita_model = new Receita();
-    }
-
     public function index()
     {
-        $receitas = $this->receita_model->where(['id_usuario' => sessao()->pegar('usuario.id')])->todos();
+        $user = Auth::user();
+        $incomes = Income::where('user_id', $user->id)->get();
 
-        return view('receitas/receitas', [
-            'receitas' => $receitas
+        return view('incomes.index', [
+            'incomes' => $incomes
         ]);
     }
 
     public function create()
     {
-        return view('receitas/novo');
+        return view('incomes.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        $receita = $this->dadosPost();
-        $this->receita_model->insert($receita);
-        return redirecionar('/dashboard');
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'amount' => 'required|numeric',
+            'date' => 'required|date',
+        ]);
+
+        $income = new Income();
+        $income->user_id = Auth::id();
+        $income->name = $validatedData['name'];
+        $income->amount = $validatedData['amount'];
+        $income->date = $validatedData['date'];
+        $income->save();
+
+        return redirect()->route('dashboard');
     }
 }

@@ -1,37 +1,43 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Http\Controllers;
 
-use Hefestos\Core\Controller;
-use App\Models\Despesa;
+use App\Models\Expense;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DespesaController extends Controller
 {
-    protected $despesa_model;
-
-    public function __construct()
-    {
-        $this->despesa_model = new Despesa();
-    }
-
     public function index()
     {
-        $despesas = $this->despesa_model->where(['id_usuario' => sessao()->pegar('usuario.id')])->todos();
+        $user = Auth::user();
+        $expenses = Expense::where('user_id', $user->id)->get();
 
-        return view('despesas/despesas', [
-            'despesas' => $despesas
+        return view('expenses.index', [
+            'expenses' => $expenses
         ]);
     }
 
     public function create()
     {
-        return view('despesas/novo');
+        return view('expenses.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        $despesa = $this->dadosPost();
-        $this->despesa_model->insert($despesa);
-        return redirecionar('/dashboard');
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'amount' => 'required|numeric',
+            'date' => 'required|date',
+        ]);
+
+        $expense = new Expense();
+        $expense->user_id = Auth::id();
+        $expense->name = $validatedData['name'];
+        $expense->amount = $validatedData['amount'];
+        $expense->date = $validatedData['date'];
+        $expense->save();
+
+        return redirect()->route('dashboard');
     }
 }

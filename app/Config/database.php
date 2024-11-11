@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'driver'  => 'sqlite', // mysql ou sqlite
-    // 'host'    => 'localhost', // caso driver seja mysql
-    // 'nome_db'  => 'olimpo', // caso driver seja mysql
+    'driver'  => 'mysql', // mysql ou sqlite
+    'host'    => 'data-base-1', // caso driver seja mysql
+    'nome_db'  => 'pi_db', // caso driver seja mysql
     'usuario' => 'root',
-    'senha'   => '',
-    'sqlite'  => 'app/Database/sqlite/padrao.sqlite', // caso driver seja sqlite
+    'senha'   => 'root',
+    //'sqlite'  => 'app/Database/sqlite/padrao.sqlite', // caso driver seja sqlite
 ];

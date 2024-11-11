@@ -2,10 +2,25 @@
 
 namespace App\Models;
 
-use Hefestos\Core\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Meta extends Model
 {
-    // tabela do banco de dados ao qual o model está relacionado
-    protected string $tabela = 'meta_financeira';
+    use HasFactory;
+
+    protected $table = 'metas';
+
+    protected $fillable = [
+        'descricao',
+        'valor_alvo',
+        'data_meta',
+        'id_usuario',
+    ];
+
+    public function getMetasPorUsuario($idUsuario)
+    {
+        return $this->where('id_usuario', $idUsuario)
+                    ->get();
+    }
 }

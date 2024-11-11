@@ -1,54 +1,53 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Http\Controllers;
 
-use Hefestos\Core\Controller;
-use App\Models\Usuario;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
-    protected $usuario_model;
-
-    public function __construct()
+    public function register(Request $request)
     {
-        $this->usuario_model = new Usuario();
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8',
+        ]);
+
+        $user = User::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => Hash::make($validatedData['password']),
+        ]);
+
+        return redirect()->route('login')->with('success', 'Registration successful. You can now log in.');
     }
 
-    public function cadastro()
+    public function login(Request $request)
     {
-        $usuario = $this->dadosPost();
+        $validatedData = $request->validate([
+            'email' => 'required|string|email',
+            'password' => 'required|string',
+        ]);
 
-        $usuario_existe = $this->usuario_model->primeiroOnde(['email' => $usuario['email']], 'email');
-        if ($usuario_existe) {
-            return redirecionar('/cadastro')
-                ->com('feedback', 'Já existe um usuário com esse email');
+        if (Auth::attempt($validatedData)) {
+            $request->session()->regenerate();
+            return redirect()->route('dashboard');
         }
 
-        $usuario['senha'] = encriptar($usuario['senha']);
-        $this->usuario_model->insert($usuario);
-
-        return redirecionar('/login');
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
     }
 
-    public function login()
+    public function logout(Request $request)
     {
-        $email ??= $this->dadosPost('email');
-        $senha ??= $this->dadosPost('senha');
-
-        $usuario_autenticado = $this->usuario_model->autenticar($email, $senha);
-        if (!$usuario_autenticado) {
-            return redirecionar('/login')
-                ->com('feedback', 'Email ou senha incorretos.');
-        }
-
-        sessao()->guardar('usuario', $usuario_autenticado);
-
-        return redirecionar('/dashboard');
-    }
-
-    public function logout()
-    {
-        sessao()->destruir();
-        return redirecionar('/');
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
     }
 }

@@ -1,33 +1,66 @@
-# Apenas use "docker compose up" na linha de comando e pronto! servidor rodando em http://localhost:8080.
-# Todas vez que for fazer um push apague os arquvos da pasta "bd" no diretorio: app/Database/bd.
-
 services:
-  back-end:
-    image: php:8.3-apache
-    ports:
-      - "8080:8080"
+  php1:
+    build:
+      context: .
+      dockerfile: .docker/php-fpm/Dockerfile
     volumes:
-      - .:/var/www/html
-    entrypoint: ["php", "forja", "iniciar", "0.0.0.0:8080"] # iniciando o servidor em 0.0.0.0:8080 para que possa ser acessado fora do container
+      - ./:/app
+    ports:
+      - "9000:9000"
+    networks:
+      - laravel
 
-  data-base:
-    image: mysql:latest
-    restart: always
+  php2:
+    build:
+      context: .
+      dockerfile: .docker/php-fpm/Dockerfile
+    volumes:
+      - ./:/app
+    ports:
+      - "9001:9001"
+    networks:
+      - laravel
+
+  nginx:
+    build:
+      context: .
+      dockerfile: .docker/nginx/Dockerfile
+    volumes:
+      - ./:/app
+    ports:
+      - "8000:80"
+    depends_on:
+      - php1
+      - php2
+    networks:
+      - laravel
+
+  db-api-sistemafinanceiro:
+    container_name: mysql
+    image: mysql
+    volumes:
+      - .docker/db_data:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: pi_db
-      MYSQL_USER: pi
-      MYSQL_PASSWORD: pi
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     ports:
       - "3307:3306"
-    volumes:
-      - ./app/Database/bd:/var/lib/mysql # Persistência de dados do banco de dados.
-      - ./app/Database/sql:/docker-entrypoint-initdb.d # Script para criar tabelas.
-  
-  phpmyadmin:
-    image: phpmyadmin:latest
-    restart: always
-    ports:
-      - "8081:80"
+    networks:
+      - laravel
+
+  phpmyadmin-api-sistemafinanceiro:
+    image: phpmyadmin/phpmyadmin
     environment:
-      - PMA_ARBITRARY=1
+      PMA_HOST: db-api-sistemafinanceiro
+      PMA_USER: root
+      PMA_PASSWORD: ${DB_ROOT_PASSWORD}
+    ports:
+      - "9999:80"
+    networks:
+      - laravel
+
+networks:
+  laravel:
+    driver: bridge

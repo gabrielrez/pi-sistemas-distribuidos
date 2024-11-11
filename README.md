@@ -1,12 +1,41 @@
-# Conta Certa
+# Gerenciamento Financeiro
+O Gerenciamento Financeiro é um sistema que facilita o controle e organização de finanças. O projeto usa Docker para facilitar a configuração e o gerenciamento do ambiente back-end.
 
-Este projeto foi desenvolvido no intuito de criar uma ferramenta que facilite a gestão financeira de uma pessoa, logo pensamos em fazer uma aplicação web de fácil acesso com compatibilidade tanto para o mobile quanto para o computador. Pensando nisso, nós teremos quatro categorias de finanças para gerir, sendo elas: receitas, despesas, investimentos e metas onde o usuário poderá adicionar, alterar e deletar qualquer um dos registros dessas quatro categorias.
+## Framework Utilizado
+Este projeto foi desenvolvido utilizando o **Laravel**.
+## Inicialização do Back-end
 
-**Tecnologias:**
+**AVISO IMPORTANTE:** É necessário ter o Docker Engine instalado no seu computador local.
 
-* HTML, CSS E JS no front-end;
-* PHP e o HefestosPHP no back-end;
-* Mysql no database;
-* Docker e Composer.
+1. Acesse o diretório do projeto:  
+   `cd sistemaFinanceiro`
 
-[Documentação](https://drive.google.com/drive/folders/1G5NEmaitHriDHS7dnUyU5E42HE2g-zXp?usp=sharing)
+2. Execute o comando para construir e iniciar o container:  
+   `docker compose up -d`
+
+3. Após o comando acima, libere a permissão para o container:
+
+   3.1 Obtenha os IDs dos containers:  
+   `docker ps`
+
+   3.2 Acesse o terminal do container PHP, substituindo `<container-api-php>` pelo ID obtido:  
+   `docker exec -it <container-api-php> /bin/bash`
+   
+   3.3 - Liberado todas as permissões do container`
+
+   `3.4 - Lembrando que essa permissão e apenas para fins de teste, e não em sistema de produção`
+
+   ```bash
+      chmod -R 775 storage
+      ou
+      chmod -R 775 bootstrap/cache
+   ```
+   `  3.4.1 - Caso o comando acima do item 3.4 não funcioner, Rode o comando abaixo. embrando que essa permissão e apenas para fins de teste, e não em sistema de produção`
+
+    ```bash
+        chmod -R 777 ./
+    ```
+4. Após isso, será necessário executar o 
+    ```
+        composer install
+    ```

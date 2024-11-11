@@ -2,19 +2,30 @@
 
 namespace App\Models;
 
-use Hefestos\Core\Model;
+use Illuminate\Database\Eloquent\Model;
 
 class Despesa extends Model
 {
-    // tabela do banco de dados ao qual o model está relacionado
-    protected string $tabela = 'despesa';
+    // A tabela do banco de dados associada ao modelo
+    protected $table = 'despesas';
 
-    public function resumoDespesas()
+    // Os atributos que podem ser atribuídos em massa
+    protected $fillable = [
+        'nome',
+        'valor',
+        'data',
+        'id_usuario',
+    ];
+
+    public function resumoDespesas($idUsuario)
     {
-        $despesas = $this->where(['id_usuario' => sessao()->pegar('usuario.id')])->todos();
-        $ultimas_despesas = array_slice($despesas, -3);
-        $total = array_sum(array_column($despesas, 'valor'));
+        $despesas = $this->where('id_usuario', $idUsuario)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
-        return [$despesas, $ultimas_despesas, $total];
+        $ultimasDespesas = $despesas->take(3);
+        $totalDespesas = $despesas->sum('valor');
+
+        return [$despesas, $ultimasDespesas, $totalDespesas];
     }
 }

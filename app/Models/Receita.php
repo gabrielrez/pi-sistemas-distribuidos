@@ -2,19 +2,30 @@
 
 namespace App\Models;
 
-use Hefestos\Core\Model;
+use Illuminate\Database\Eloquent\Model;
 
 class Receita extends Model
 {
-    // tabela do banco de dados ao qual o model está relacionado
-    protected string $tabela = 'receita';
+    // A tabela do banco de dados associada ao modelo
+    protected $table = 'receitas';
 
-    public function resumoReceitas($usuario_id)
+    // Os atributos que podem ser atribuídos em massa
+    protected $fillable = [
+        'nome',
+        'valor',
+        'data',
+        'id_usuario',
+    ];
+
+    public function getResumoReceitas($idUsuario)
     {
-        $receitas = $this->where(['id_usuario' => $usuario_id])->todos();
-        $ultimas_receitas = array_slice($receitas, -3);
-        $total = array_sum(array_column($receitas, 'valor'));
+        $receitas = $this->where('id_usuario', $idUsuario)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
-        return [$receitas, $ultimas_receitas, $total];
+        $ultimasReceitas = $receitas->take(3);
+        $totalReceitas = $receitas->sum('valor');
+
+        return [$receitas, $ultimasReceitas, $totalReceitas];
     }
 }
