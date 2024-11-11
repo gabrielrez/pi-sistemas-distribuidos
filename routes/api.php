@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContaController;
 use App\Http\Controllers\MetaController;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\DespesaController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -44,4 +45,13 @@ Route::prefix('categorias')->group(function () {
     Route::get('/{id}', [CategoriaController::class, 'show']);
     Route::put('/{id}', [CategoriaController::class, 'update']);
     Route::delete('/{id}', [CategoriaController::class, 'destroy']);
+});
+
+
+Route::prefix('despesas')->group(function () {
+    Route::get('/', [DespesaController::class, 'index']);
+    Route::post('/', [DespesaController::class, 'store']);
+    Route::get('/{id}', [DespesaController::class, 'show']);
+    Route::put('/{id}', [DespesaController::class, 'update']);
+    Route::delete('/{id}', [DespesaController::class, 'destroy']);
 });
