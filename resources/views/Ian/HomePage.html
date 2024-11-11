@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style2.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>logo</h1>
+
+      <ul>
+        <li>opa</li>
+        <li>opa</li>
+      </ul>
+    </header>
+
+    <main>
+      <div class="filtro_cor"></div>
+
+      <br />
+      <div class="textos">
+        <h1>Acompanhe suas finanças!</h1>
+        <p>
+          Bem-vindo ao seu painel de controle financeiro! Aqui, você pode
+          gerenciar seus gastos, acompanhar seus objetivos e ter uma visão clara
+          de sua situação financeira.
+        </p>
+      </div>
+      <br /><br />
+
+      <div class="botoes">
+        <a href="sobreNos.html">
+          <button class="bt1">Sobre Nós</button>
+        </a>
+        <br />
+        <a href="Investimentos.html">
+          <button class="bt2">Investimento</button>
+        </a>
+      </div>
+    </main>
+
+    <div class="Graficos">
+      <div
+        style="width: 100%; height: 800px"
+        id="graficoPatrimonio"
+        class="graficoPatrimonio"
+      >
+        <h1>Patrimonio</h1>
+        <canvas id="grafico1" class="grafico1"></canvas>
+      </div>
+
+      <script>
+        const ctx1 = document.getElementById("grafico1").getContext("2d");
+        let valores = [6, 5, 4, 3, 2, 3];
+        let categorias = [
+          "Janeiro",
+          "Fevereiro",
+          "Março",
+          "Abril",
+          "Maio",
+          "junho",
+        ];
+
+        new Chart(ctx1, {
+          type: "bar",
+          data: {
+            labels: categorias,
+            datasets: [
+              {
+                label: "valores",
+                data: valores,
+                backgroundColor: "rgba(87, 0, 228, 0.5)",
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                display: false,
+              },
+              title: {
+                display: true,
+              },
+            },
+            layout: {
+              padding: {
+                right: 100,
+              },
+            },
+          },
+        });
+      </script>
+    </div>
+
+    <section class="opcoes">
+      <a href="receitas.html">
+        <div class="receitas">
+          <h1>Receitas</h1>
+        </div>
+      </a>
+
+      <a href="Despesas.html">
+        <div class="despesas">
+          <h1>Despesas</h1>
+        </div>
+      </a>
+
+      <a href="Metas.html">
+        <div class="metas">
+          <h1>metas</h1>
+        </div>
+      </a>
+    </section>
+  </body>
+</html>
