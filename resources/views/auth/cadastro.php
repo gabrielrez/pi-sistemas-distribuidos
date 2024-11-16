@@ -20,6 +20,37 @@
     <button>Criar Conta</button>
     <a href="/login" class="toggle-auth">Já tenho conta</a>
 </form>
+<script>
+    const form = document.getElementById('cadastro-form');
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const data = {
+            nome: document.getElementById('nome').value,
+            email: document.getElementById('email').value,
+            senha: document.getElementById('senha').value,
+        };
+
+        try {
+            const response = await fetch('http://127.0.0.1:8000/api/users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                alert(result.message);
+            } else {
+                alert('Erro: ' + result.message);
+            }
+        } catch (error) {
+            console.error('Erro na requisição:', error);
+        }
+    });
+</script>
 
 <style>
     body {

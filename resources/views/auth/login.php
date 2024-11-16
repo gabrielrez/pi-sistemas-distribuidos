@@ -1,21 +1,54 @@
 <!doctype html>
 <html lang="en">
-    
+
 <h1>Entrar na Conta</h1>
 
-<form action="/login" method="POST">
+<form id="login-form">
     <div class="input">
         <label for="email">E-mail</label>
-        <input type="email" name="email" placeholder="Seu E-mail" required>
+        <input type="email" name="email" id="email" placeholder="Seu E-mail" required>
     </div>
     <div class="input">
         <label for="senha">Senha</label>
-        <input type="password" name="senha" placeholder="Sua Senha" required>
+        <input type="password" name="senha" id="senha" placeholder="Sua Senha" required>
     </div>
 
-    <button>Entrar</button>
+    <button type="submit">Entrar</button>
     <a href="/cadastro" class="toggle-auth">Não tenho conta</a>
 </form>
+
+<script>
+    const form = document.getElementById('login-form');
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const data = {
+            email: document.getElementById('email').value,
+            senha: document.getElementById('senha').value,
+        };
+
+        try {
+            const response = await fetch('http://localhost:8000/api/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                alert(result.message);
+                localStorage.setItem('token', result.token); 
+                window.location.href = "/dashboard"; 
+            } else {
+                alert('Erro: ' + result.message);
+            }
+        } catch (error) {
+            console.error('Erro na requisição:', error);
+        }
+    });
+</script>
 
 <style>
     body {
@@ -72,3 +105,5 @@
         margin: 16px auto;
     }
 </style>
+
+</html>

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ReceitaController;
 use App\Http\Controllers\DespesaController;
@@ -26,10 +26,10 @@ Route::get('/login', function () {
     return view('auth.login');
 });
 
-Route::post('/cadastro', [UsuarioController::class, 'cadastro']); // Criar usuário
-Route::post('/login', [UsuarioController::class, 'login']); // Login usuário
-Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout'); // Logout usuário
-Route::delete('/usuarios/{id}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy'); // Deletar usuário
+Route::post('/cadastro', [UserController::class, 'cadastro']); // Criar usuário
+Route::post('/login', [UserController::class, 'login']); // Login usuário
+Route::get('/logout', [UserController::class, 'logout'])->name('logout'); // Logout usuário
+Route::delete('/usuarios/{id}', [UserController::class, 'destroy'])->name('usuarios.destroy'); // Deletar usuário
 
 // Rota protegida por middleware de autenticação
 Route::middleware('auth')->group(function () {
