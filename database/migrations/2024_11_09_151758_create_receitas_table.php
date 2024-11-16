@@ -10,12 +10,16 @@ class CreateReceitasTable extends Migration
     {
         Schema::create('receitas', function (Blueprint $table) {
             $table->id('id_receita');
-            $table->foreignId('id_conta')->constrained('contas')->onDelete('cascade');
-            $table->foreignId('id_categoria')->constrained('categorias')->onDelete('cascade');
+            $table->unsignedBigInteger('id_conta');
+            $table->unsignedBigInteger('id_categoria');
             $table->decimal('valor', 10, 2);
             $table->dateTime('data');
-            $table->string('descricao', 255)->nullable();
+            $table->string('descricao')->nullable();
             $table->timestamps();
+
+            
+            $table->foreign('id_conta')->references('id_conta')->on('contas');
+            $table->foreign('id_categoria')->references('id_categoria')->on('categorias');
         });
     }
 
