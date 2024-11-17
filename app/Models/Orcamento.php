@@ -5,28 +5,28 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Receita extends Model
+class Orcamento extends Model
 {
     use HasFactory;
 
-    protected $table = 'receitas';
+    protected $table = 'orcamentos';
 
-    protected $primaryKey = 'id_receita';
+    protected $primaryKey = 'id_orcamento';
 
     public $timestamps = true;
 
     protected $fillable = [
-        'id_conta',
+        'id_users',
         'id_categoria',
-        'valor',
-        'data',
-        'descricao'
+        'valor_planejado',
+        'data_inicio',
+        'data_fim'
     ];
 
 
-    public function conta()
+    public function user()
     {
-        return $this->belongsTo(Conta::class, 'id_conta');
+        return $this->belongsTo(User::class, 'id_users');
     }
 
     public function categoria()

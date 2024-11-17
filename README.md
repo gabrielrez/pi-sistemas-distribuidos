@@ -1,38 +1,41 @@
-# Conta Certa
-Conta certa é um sistema de gerenciamento financeiro pessoal completo, desenvolvido para auxiliar na gestão financeira apresentando dashboard e interfaces simples e práticas de maneira intuitiva e dinâmica.
+# Gerenciamento Financeiro
+O Gerenciamento Financeiro é um sistema que facilita o controle e organização de finanças. O projeto usa Docker para facilitar a configuração e o gerenciamento do ambiente back-end.
 
-## Ferramentas utilizadas
-- Larvel framework;
-- Docker container (nginx, php:8.2-fpm-alpine, mysql e phpmyadmin).
+## Framework Utilizado
+Este projeto foi desenvolvido utilizando o **Laravel**.
+## Inicialização do Back-end
 
-## Inicialização do projeto
+**AVISO IMPORTANTE:** É necessário ter o Docker Engine instalado no seu computador local.
 
-1. Comando para iniciar e configurar os conteiner no Docker (Obs.: O docker tem que estar aberto e com permissão de administrador);
-```bash
-docker-compose up -d
-```
+1. Acesse o diretório do projeto:  
+   `cd sistemaFinanceiro`
 
-2. Comando para abrir o "terminal" do contêiner de back-end-1.
-```bash
-docker-compose exec back-end-1 bash
-```
+2. Execute o comando para construir e iniciar o container:  
+   `docker compose up -d`
 
-3. Comando para instalar as dependências do contêiner, para ele rodar normalmente;
-```bash
-composer install
-```
+3. Após o comando acima, libere a permissão para o container:
 
-4. Comando para criar as tabelas no banco de dados.
-```bash
-php artisan migrate
-```
+   3.1 Obtenha os IDs dos containers:  
+   `docker ps`
 
-5. Execute novamente o comando para abrir o "terminal" do contêiner de back-end-2.
-```bash
-docker-compose exec back-end-2 bash
-```
+   3.2 Acesse o terminal do container PHP, substituindo `<container-api-php>` pelo ID obtido:  
+   `docker exec -it <container-api-php> /bin/bash`
+   
+   3.3 - Liberado todas as permissões do container`
 
-6. E novamente execute o comando para instalar as dependências do contêiner, para ele rodar normalmente;
-```bash
-composer install
-```
+   `3.4 - Lembrando que essa permissão e apenas para fins de teste, e não em sistema de produção`
+
+   ```bash
+      chmod -R 775 storage
+      ou
+      chmod -R 775 bootstrap/cache
+   ```
+   `  3.4.1 - Caso o comando acima do item 3.4 não funcioner, Rode o comando abaixo. embrando que essa permissão e apenas para fins de teste, e não em sistema de produção`
+
+    ```bash
+        chmod -R 777 ./
+    ```
+4. Após isso, será necessário executar o 
+    ```
+        composer install
+    ```

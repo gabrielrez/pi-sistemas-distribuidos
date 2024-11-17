@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Receita extends Model
+class Despesa extends Model
 {
     use HasFactory;
 
-    protected $table = 'receitas';
+    protected $table = 'despesas';
 
-    protected $primaryKey = 'id_receita';
+    protected $primaryKey = 'id_despesa';
 
     public $timestamps = true;
 
@@ -23,7 +23,7 @@ class Receita extends Model
         'descricao'
     ];
 
-
+    
     public function conta()
     {
         return $this->belongsTo(Conta::class, 'id_conta');
