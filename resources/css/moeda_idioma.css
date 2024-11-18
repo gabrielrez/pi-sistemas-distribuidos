@@ -1,0 +1,78 @@
+
+.config-section {
+    width: 70vw;
+    max-width: 1000px;
+    margin-top: 5vh;
+    padding: 20px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    font-family: 'Arial', sans-serif;
+}
+
+
+.config-section h2 {
+    font-size: 28px;
+    color: #47aad8;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+form label {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 8px;
+    text-align: left;
+    width: 100%;
+}
+
+
+form select {
+    width: 80%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    outline: none;
+    background: #fff;
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+
+form select:focus {
+    border-color: #47aad8;
+    background: #f4f8fb;
+    box-shadow: 0 0 5px rgba(71, 170, 216, 0.5);
+}
+
+
+@media (max-width: 768px) {
+    .config-section {
+        width: 90vw;
+        padding: 15px;
+    }
+
+    form select {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .config-section {
+        width: 95vw;
+        padding: 10px;
+    }
+
+    form select {
+        width: 100%;
+    }
+}
