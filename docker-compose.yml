@@ -1,5 +1,5 @@
 services:
-  php1:
+  back-end-1:
     build:
       context: .
       dockerfile: .docker/php-fpm/Dockerfile
@@ -10,7 +10,7 @@ services:
     networks:
       - laravel
 
-  php2:
+  back-end-2:
     build:
       context: .
       dockerfile: .docker/php-fpm/Dockerfile
@@ -21,7 +21,7 @@ services:
     networks:
       - laravel
 
-  nginx:
+  front-end:
     build:
       context: .
       dockerfile: .docker/nginx/Dockerfile
@@ -30,13 +30,12 @@ services:
     ports:
       - "8000:80"
     depends_on:
-      - php1
-      - php2
+      - back-end-1
+      - back-end-2
     networks:
       - laravel
 
-  db-api-sistemafinanceiro:
-    container_name: mysql
+  data-base:
     image: mysql
     volumes:
       - .docker/db_data:/var/lib/mysql
@@ -50,12 +49,12 @@ services:
     networks:
       - laravel
 
-  phpmyadmin-api-sistemafinanceiro:
+  phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment:
-      PMA_HOST: db-api-sistemafinanceiro
-      PMA_USER: root
-      PMA_PASSWORD: ${DB_ROOT_PASSWORD}
+      PMA_HOST: data-base
+      PMA_USER: ${DB_USERNAME}
+      PMA_PASSWORD: ${DB_PASSWORD}
     ports:
       - "9999:80"
     networks:
