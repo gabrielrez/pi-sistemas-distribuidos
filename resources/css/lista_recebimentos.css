@@ -1,0 +1,154 @@
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 30px auto;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+
+.tittle-entidades {
+    text-align: center;
+    font-size: 24px;
+    color: #47aad8;
+    margin-bottom: 20px;
+}
+
+
+.meses {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+
+.lista-container input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #47aad8;
+    color: white;
+}
+
+table tr:hover {
+    background-color: #f0f8ff;
+}
+
+
+.meus-botoes {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+
+.meus-botoes a {
+    text-decoration: none;
+    font-size: 16px;
+    color: #333;
+    padding: 10px 20px;
+    background-color: #47aad8;
+    border-radius: 30px;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.meus-botoes a:hover {
+    background-color: #4bc6fa;
+}
+
+button.excluir {
+    padding: 8px 15px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button.excluir:hover {
+    background-color: #e53935;
+}
+
+.modal-content {
+    border-radius: 10px;
+}
+
+
+.alert {
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .meus-botoes {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .meus-botoes a {
+        margin-bottom: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    table th, table td {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+}
